@@ -27,6 +27,9 @@ int querypagesOffset = 2;
 
 var items = new VideoSearch();
 
+//change the encoding, using Encoding.Default if not set
+items.encoding = Encoding.UTF8; 
+
 foreach (var item in items.SearchQuery(querystring, querypages))
 {
     Console.WriteLine(item.Title);
