@@ -47,5 +47,6 @@ var offsetResult = items.SearchQuery(querystring, querypages, querypagesOffset);
 - Duration
 - Thumbnail
 - Video Url
+- View Count
 
 
