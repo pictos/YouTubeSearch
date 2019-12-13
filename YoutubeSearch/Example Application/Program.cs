@@ -86,7 +86,7 @@ namespace Example_Application
         }
 
         //example for using the offset value
-        private static async void OffsetQuery()
+        private static void OffsetQuery()
         {
             //this function will return all results from page 1 to page 10
             var querystring = "test";
