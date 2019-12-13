@@ -21,7 +21,7 @@ namespace Example_Application
             ////////////////////////////////
             // Starting searchquery
             ////////////////////////////////
-
+            
             var items = new VideoSearch();
 
             //specify the encoding for this object
