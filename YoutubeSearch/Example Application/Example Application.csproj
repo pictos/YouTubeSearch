@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ReleaseVersion>1.1</ReleaseVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YoutubeSearch\YoutubeSearch.csproj">
-      <Project>{dfece3e8-99d9-4652-b486-bea1010329ba}</Project>
+      <Project>{e5619b80-3dd7-474a-85aa-84dead6abaeb}</Project>
       <Name>YoutubeSearch</Name>
     </ProjectReference>
   </ItemGroup>

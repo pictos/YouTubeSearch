@@ -1,12 +1,22 @@
+This is a direct fork of [mrklintscher/YoutubeSearch](https://github.com/mrklintscher/YoutubeSearch)
+
+This fork is featuring .NET Core (without modification) and offers a NuGet package for the newest version (including Async support). If the original repo and NuGet is updated, this fork will not be continued.
+
 # YoutubeSearch
 YoutubeSearch is a library for .NET, written in C#, to show search query results from YouTube.
 
 # Target platforms
-- .NET Framework 4.5 and higher
-- Windows Phone 8
-- WinRT
-- Xamarin.Android
-- Xamarin.iOS
+
+This library is using .NET Standard 2.0 and is therefore compatible with the following platforms (see [Microsoft Docs](https://docs.microsoft.com/de-de/dotnet/standard/net-standard#net-implementation-support)).
+- .NET Framework 4.6.1+
+- .NET Core 2.0+
+- Mono 5.4+
+- Xamarin.iOS 10.14+
+- Xamarin.Mac 3.8+
+- Xamarin.Android 8.0+
+- UWP 10.0.16299+
+- Unity 2018.1+
+<br/>
 
 # NuGet
 **Install-Package YoutubeSearch.dll**
