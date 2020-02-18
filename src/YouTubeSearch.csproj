@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,6 +9,7 @@
     <Product />
     <Description>YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them.</Description>
     <Copyright>Copyright © 2020 Torsten Klinger</Copyright>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
