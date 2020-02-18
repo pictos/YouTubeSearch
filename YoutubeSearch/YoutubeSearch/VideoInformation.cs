@@ -17,14 +17,39 @@ namespace YoutubeSearch
 {
     public class VideoInformation
     {
+        /// <summary>
+        /// Title of the video
+        /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// Name of the Youtube Channel
+        /// </summary>
         public string Author { get; set; }
+        /// <summary>
+        /// Description of the video as shown in the browser. Empty string if not provided by Youtube
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// Duration of the video (hh:mm:ss)
+        /// </summary>
         public string Duration { get; set; }
+        /// <summary>
+        /// Full browser url to the video
+        /// </summary>
         public string Url { get; set; }
+        /// <summary>
+        /// url to the thumbnail (quality is "mqdefault")
+        /// </summary>
         public string Thumbnail { get; set; }
+        /// <summary>
+        /// True if video has no description.
+        /// </summary>
         public bool NoDescription { get; set; }
+
         public bool NoAuthor { get; set; }
+        /// <summary>
+        /// Number of views at the moment of the request. This is the number which is shown in the browser and not necessarily the true view number.
+        /// </summary>
         public string ViewCount { get; set; }
     }
 }

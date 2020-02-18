@@ -40,7 +40,7 @@ namespace YoutubeSearch
         /// <summary>
         /// Specify the used encoding. Recommended: ASCII, UTF-8
         /// </summary>
-        public Encoding encoding = Encoding.Default;
+        public Encoding encoding { get; set; } = Encoding.Default;
 
 
         List<VideoInformation> items;
