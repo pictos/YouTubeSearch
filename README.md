@@ -28,32 +28,29 @@ YoutubeSearch is licensed under the **GPL** license.
 
 # Example code
 ```c#
-// Disable logging
-            Log.setMode(false);
+// Keyword
+string querystring = "Usher";
 
-            // Keyword
-            string querystring = "Usher";
+// Number of result pages
+int querypages = 1;
 
-            // Number of result pages
-            int querypages = 1;
+////////////////////////////////
+// Start searching
+////////////////////////////////
 
-            ////////////////////////////////
-            // Start searching
-            ////////////////////////////////
+VideoSearch videos = new VideoSearch();
+var items = await videos.GetVideos(querystring, querypages);
 
-            VideoSearch videos = new VideoSearch();
-            var items = await videos.GetVideos(querystring, querypages);
-
-            foreach (var item in items)
-            {
-                Console.WriteLine("Title: " + item.getTitle());
-                Console.WriteLine("Author: " + item.getAuthor());
-                Console.WriteLine("Description: " + item.getDescription());
-                Console.WriteLine("Duration: " + item.getDuration());
-                Console.WriteLine("Url: " + item.getUrl());
-                Console.WriteLine("Thumbnail: " + item.getThumbnail());
-                Console.WriteLine("");
-            }
+foreach (var item in items)
+{
+    Console.WriteLine("Title: " + item.getTitle());
+    Console.WriteLine("Author: " + item.getAuthor());
+    Console.WriteLine("Description: " + item.getDescription());
+    Console.WriteLine("Duration: " + item.getDuration());
+    Console.WriteLine("Url: " + item.getUrl());
+    Console.WriteLine("Thumbnail: " + item.getThumbnail());
+    Console.WriteLine("");
+}
 ```
 
 # Supported Items
