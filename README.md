@@ -57,6 +57,6 @@ DownloadVideo(videoInfos);
 - Duration
 - Thumbnail
 - Video url
-- Download url
+
 
 Torsten Klinger - (c) 2020 | Nuremberg Germany.
