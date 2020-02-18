@@ -5,7 +5,7 @@ This is a direct fork of [mrklintscher/YoutubeSearch](https://github.com/mrklint
 This fork is featuring .NET Core (without modification) and offers a NuGet package for the newest version (including Async support). If the original repo and NuGet is updated, this fork will not be continued.
 
 # YoutubeSearch
-YoutubeSearch is a library for .NET, written in C#, to show search query results from YouTube.
+YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them. 
 
 # Target platforms
 
@@ -18,40 +18,35 @@ This library is using .NET Standard 2.0 and is therefore compatible with the fol
 - Xamarin.Android 8.0+
 - UWP 10.0.16299+
 - Unity 2018.1+
-<br/>
-
-# NuGet
-**Install-Package YoutubeSearch.dll**
-
-# License
-YoutubeSearch is licensed under the **GPL** license.
 
 # Example code
 ```c#
-// Keyword
-string querystring = "test";
+>> Search <<
 
-// Number of result pages
+string querystring = "Usher";
 int querypages = 1;
 
-// Offset value for querypages
-int querypagesOffset = 2;
+VideoSearch videos = new VideoSearch();
+var items = await videos.GetVideos(querystring, querypages);
 
-var items = new VideoSearch();
-
-//change the encoding, using Encoding.Default if not set
-items.encoding = Encoding.UTF8; 
-
-foreach (var item in items.SearchQuery(querystring, querypages))
+foreach (var item in items)
 {
-    Console.WriteLine(item.Title);
+    Console.WriteLine("Title: " + item.getTitle());
+    Console.WriteLine("Author: " + item.getAuthor());
+    Console.WriteLine("Description: " + item.getDescription());
+    Console.WriteLine("Duration: " + item.getDuration());
+    Console.WriteLine("Url: " + item.getUrl());
+    Console.WriteLine("Thumbnail: " + item.getThumbnail());
+    Console.WriteLine("");
 }
 
-//For asynchronous execution use:
-var result = await items.SearchQueryAsync(querystring, querypages);
+>> Download <<
 
-//This will query from page 3 to 4
-var offsetResult = items.SearchQuery(querystring, querypages, querypagesOffset);
+string link = "https://www.youtube.com/watch?v=daKz_b7LrsE";
+
+IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link, false);
+
+DownloadVideo(videoInfos);
 ```
 
 # Supported Items
@@ -61,7 +56,5 @@ var offsetResult = items.SearchQuery(querystring, querypages, querypagesOffset);
 - Description
 - Duration
 - Thumbnail
-- Video Url
-- View Count
-
-
+- Video url
+- Download url
