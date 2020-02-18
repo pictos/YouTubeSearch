@@ -19,12 +19,6 @@ This library is using .NET Standard 2.0 and is therefore compatible with the fol
 - UWP 10.0.16299+
 - Unity 2018.1+
 
-# NuGet
-**Install-Package YoutubeSearch.dll**
-
-# License
-YoutubeSearch is licensed under the **GPL** license.
-
 # Example code
 ```c#
 // Keyword
