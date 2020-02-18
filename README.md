@@ -1,5 +1,11 @@
-# YoutubeSearch
-YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them. 
+# YoutubeSearch ![YoutubeSearch](https://i.ibb.co/sFPpJ7k/1200px-Logo-of-You-Tube-2013-2015-svg.jpg)
+An complete Private Instagram Api for .NET (C#, VB.NET).
+
+YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them.
+
+| Target | Branch | Version | Download link |
+| ------ | ------ | ------ | ------ |
+| Nuget | master | v2.0.0 | [![NuGet](https://img.shields.io/nuget/v/InstagramApiSharp.svg)](https://www.nuget.org/packages/YouTubeSearch/) |
 
 # Target platforms
 
