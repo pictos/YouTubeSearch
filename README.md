@@ -21,15 +21,10 @@ This library is using .NET Standard 2.0 and is therefore compatible with the fol
 
 # Example code
 ```c#
-// Keyword
+Search
+
 string querystring = "Usher";
-
-// Number of result pages
 int querypages = 1;
-
-////////////////////////////////
-// Start searching
-////////////////////////////////
 
 VideoSearch videos = new VideoSearch();
 var items = await videos.GetVideos(querystring, querypages);
@@ -44,6 +39,14 @@ foreach (var item in items)
     Console.WriteLine("Thumbnail: " + item.getThumbnail());
     Console.WriteLine("");
 }
+
+Download
+
+string link = "https://www.youtube.com/watch?v=daKz_b7LrsE";
+
+IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link, false);
+
+DownloadVideo(videoInfos);
 ```
 
 # Supported Items
