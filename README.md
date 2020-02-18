@@ -5,7 +5,7 @@ This is a direct fork of [mrklintscher/YoutubeSearch](https://github.com/mrklint
 This fork is featuring .NET Core (without modification) and offers a NuGet package for the newest version (including Async support). If the original repo and NuGet is updated, this fork will not be continued.
 
 # YoutubeSearch
-YoutubeSearch is a library for .NET, written in C#, to show search query results from YouTube.
+YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them. 
 
 # Target platforms
 
@@ -28,30 +28,32 @@ YoutubeSearch is licensed under the **GPL** license.
 
 # Example code
 ```c#
-// Keyword
-string querystring = "test";
+// Disable logging
+            Log.setMode(false);
 
-// Number of result pages
-int querypages = 1;
+            // Keyword
+            string querystring = "Usher";
 
-// Offset value for querypages
-int querypagesOffset = 2;
+            // Number of result pages
+            int querypages = 1;
 
-var items = new VideoSearch();
+            ////////////////////////////////
+            // Start searching
+            ////////////////////////////////
 
-//change the encoding, using Encoding.Default if not set
-items.encoding = Encoding.UTF8; 
+            VideoSearch videos = new VideoSearch();
+            var items = await videos.GetVideos(querystring, querypages);
 
-foreach (var item in items.SearchQuery(querystring, querypages))
-{
-    Console.WriteLine(item.Title);
-}
-
-//For asynchronous execution use:
-var result = await items.SearchQueryAsync(querystring, querypages);
-
-//This will query from page 3 to 4
-var offsetResult = items.SearchQuery(querystring, querypages, querypagesOffset);
+            foreach (var item in items)
+            {
+                Console.WriteLine("Title: " + item.getTitle());
+                Console.WriteLine("Author: " + item.getAuthor());
+                Console.WriteLine("Description: " + item.getDescription());
+                Console.WriteLine("Duration: " + item.getDuration());
+                Console.WriteLine("Url: " + item.getUrl());
+                Console.WriteLine("Thumbnail: " + item.getThumbnail());
+                Console.WriteLine("");
+            }
 ```
 
 # Supported Items
@@ -61,7 +63,5 @@ var offsetResult = items.SearchQuery(querystring, querypages, querypagesOffset);
 - Description
 - Duration
 - Thumbnail
-- Video Url
-- View Count
-
-
+- Video url
+- Download url
