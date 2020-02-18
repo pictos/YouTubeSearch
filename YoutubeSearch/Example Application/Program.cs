@@ -24,6 +24,10 @@ namespace Example_Application
 
             var items = new VideoSearch();
 
+            //specify the encoding for this object
+            items.encoding = Encoding.UTF8;
+            
+
             int i = 1;
 
             foreach (var item in items.SearchQuery(querystring, querypages))

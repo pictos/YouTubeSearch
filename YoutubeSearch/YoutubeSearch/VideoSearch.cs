@@ -22,6 +22,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
 using System;
+using System.Text;
 
 namespace YoutubeSearch
 {
@@ -34,6 +35,12 @@ namespace YoutubeSearch
         private const string YtQueryUrl = "https://www.youtube.com/results?search_query=";
         private const string YtThumbnailUrl = "https://i.ytimg.com/vi/";
         private const string YtWatchUrl = "http://www.youtube.com/watch?v=";
+
+
+        /// <summary>
+        /// Specify the used encoding. Recommended: ASCII, UTF-8
+        /// </summary>
+        public Encoding encoding = Encoding.Default;
 
 
         List<VideoInformation> items;
@@ -68,6 +75,7 @@ namespace YoutubeSearch
             items = new List<VideoInformation>();
 
             webclient = new WebClient();
+            webclient.Encoding = encoding;
 
             // Do search, regarding offset
             for (int i = (1 + querypagesOffset); i <= (querypages + querypagesOffset); i++)
@@ -98,6 +106,7 @@ namespace YoutubeSearch
             items = new List<VideoInformation>();
 
             webclient = new WebClient();
+            webclient.Encoding = encoding;
 
             // Do search, regarding offset
             for (int i = (1 + querypagesOffset); i <= (querypages + querypagesOffset); i++)
