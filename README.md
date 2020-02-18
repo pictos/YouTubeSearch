@@ -21,7 +21,7 @@ This library is using .NET Standard 2.0 and is therefore compatible with the fol
 
 # Example code
 ```c#
-Search
+>> Search <<
 
 string querystring = "Usher";
 int querypages = 1;
@@ -40,7 +40,7 @@ foreach (var item in items)
     Console.WriteLine("");
 }
 
-Download
+>> Download <<
 
 string link = "https://www.youtube.com/watch?v=daKz_b7LrsE";
 
