@@ -18,7 +18,6 @@ This library is using .NET Standard 2.0 and is therefore compatible with the fol
 - Xamarin.Android 8.0+
 - UWP 10.0.16299+
 - Unity 2018.1+
-<br/>
 
 # NuGet
 **Install-Package YoutubeSearch.dll**
