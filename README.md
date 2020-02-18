@@ -1,5 +1,3 @@
-[![Nuget](https://img.shields.io/nuget/v/YouTubeSearch)](https://www.nuget.org/packages/YouTubeSearch/)
-
 # YoutubeSearch
 YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them. 
 
