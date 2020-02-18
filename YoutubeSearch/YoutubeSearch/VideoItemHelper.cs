@@ -26,8 +26,12 @@ namespace YoutubeSearch
                 Start = strSource.IndexOf(strStart, 0) + strStart.Length;
                 End = strSource.IndexOf(strEnd, Start);
 
+                //compensate for reverse call of arguments
 				int val = (End > Start ? End - Start : Start - End);
-				if (val < 1 || val >= strSource.Length)
+
+                //do not allow 0 length
+                //do not allow index greater the length of string
+				if (val < 1 || (Start + val) >= strSource.Length)
 					return "";
 
 				return strSource.Substring(Start, val);
