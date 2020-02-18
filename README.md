@@ -1,11 +1,11 @@
-[![Nuget](https://img.shields.io/nuget/v/Mayerch1.YoutubeSearch)](https://www.nuget.org/packages/Mayerch1.GithubUpdateCheck/)
+# YoutubeSearch ![YoutubeSearch](https://i.ibb.co/XkmN09L/1200px-Logo-of-You-Tube-2013-2015-svg.jpg)
+An complete private YouTube Api for .NET (C#, VB.NET).
 
-This is a direct fork of [mrklintscher/YoutubeSearch](https://github.com/mrklintscher/YoutubeSearch)
+YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them.
 
-This fork is featuring .NET Core (without modification) and offers a NuGet package for the newest version (including Async support). If the original repo and NuGet is updated, this fork will not be continued.
-
-# YoutubeSearch
-YoutubeSearch is a library for .NET, written in C#, to search and extract the download link from YouTube videos, download them. 
+| Target | Branch | Version | Download link |
+| ------ | ------ | ------ | ------ |
+| Nuget | master | v2.0.0 | [![NuGet](https://img.shields.io/badge/nuget-v2.0.0-blue)](https://www.nuget.org/packages/YouTubeSearch/) |
 
 # Target platforms
 
@@ -56,5 +56,6 @@ DownloadVideo(videoInfos);
 - Description
 - Duration
 - Thumbnail
-- Video url
-- Download url
+- Url
+<br>
+Torsten Klinger - (c) 2020 | Nuremberg Germany.
