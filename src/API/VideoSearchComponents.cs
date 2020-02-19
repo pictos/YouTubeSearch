@@ -10,8 +10,9 @@ namespace YouTubeSearch
         private String Duration;
         private String Url;
         private String Thumbnail;
+        private String ViewCount;
 
-        public VideoSearchComponents(String Title, String Author, String Description, String Duration, String Url, String Thumbnail)
+        public VideoSearchComponents(String Title, String Author, String Description, String Duration, String Url, String Thumbnail, String ViewCount)
         {
             this.setTitle(Title);
             this.setAuthor(Author);
@@ -19,6 +20,7 @@ namespace YouTubeSearch
             this.setDuration(Duration);
             this.setUrl(Url);
             this.setThumbnail(Thumbnail);
+            this.setViewCount(ViewCount);
         }
 
         public String getTitle()
@@ -79,6 +81,16 @@ namespace YouTubeSearch
         public void setThumbnail(String thumbnail)
         {
             Thumbnail = thumbnail;
+        }
+
+        public String getViewCount()
+        {
+            return ViewCount;
+        }
+
+        public void setViewCount(String viewcount)
+        {
+            ViewCount = viewcount;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace YouTubeSearch
         static string duration;
         static string url;
         static string thumbnail;
+        static string viewcount;
 
         /// <summary>
         /// Search videos
@@ -82,13 +84,28 @@ namespace YouTubeSearch
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Thumbnail: " + thumbnail);
 
+                    // View count
+                    {
+                        string strView = Helper.ExtractValue(result[ctr].Value, "</li><li>", "</li></ul></div>");
+                        if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
+                        {
+                            string[] strParsedArr =
+                                strView.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+                            string parsedText = strParsedArr[0];
+                            parsedText = parsedText.Trim().Replace(",", ".");
+
+                            viewcount = parsedText;
+                        }
+                    }
+
                     // Remove playlists
                     if (title != "__title__" && title != " ")
                     {
                         if (duration != "" && duration != " ")
                         {
                             // Add item to list
-                            items.Add(new VideoSearchComponents(title, author, description, duration, url, thumbnail));
+                            items.Add(new VideoSearchComponents(title, author, description, duration, url, thumbnail, viewcount));
                         }
                     }
                 }

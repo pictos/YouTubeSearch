@@ -10,8 +10,8 @@ namespace ExampleApplication
 	{
 		static void Main(string[] args)
 		{
-            //Search();
-            Download();
+            Search();
+            //Download();
             Console.ReadLine();
         }
 
@@ -41,6 +41,7 @@ namespace ExampleApplication
                 Console.WriteLine("Duration: " + item.getDuration());
                 Console.WriteLine("Url: " + item.getUrl());
                 Console.WriteLine("Thumbnail: " + item.getThumbnail());
+                Console.WriteLine("ViewCount: " + item.getViewCount());
                 Console.WriteLine("");
             }
         }
