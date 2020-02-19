@@ -57,5 +57,6 @@ DownloadVideo(videoInfos);
 - Duration
 - Thumbnail
 - Url
+- View count
 <br>
 Torsten Klinger - (c) 2020 | Nuremberg, Germany.
