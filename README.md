@@ -37,6 +37,7 @@ foreach (var item in items)
     Console.WriteLine("Duration: " + item.getDuration());
     Console.WriteLine("Url: " + item.getUrl());
     Console.WriteLine("Thumbnail: " + item.getThumbnail());
+    Console.WriteLine("ViewCount: " + item.getViewCount());
     Console.WriteLine("");
 }
 
