@@ -9,7 +9,7 @@ namespace YouTubeSearch
     {
         public static string DecipherWithVersion(string cipher, string cipherVersion)
         {
-            string jsUrl = string.Format("http://s.ytimg.com/yts/jsbin/player{0}.js", cipherVersion);
+            string jsUrl = string.Format("http://youtube.com/{0}.js", cipherVersion);
             string js = HttpHelper.DownloadString(jsUrl);
 
             //Find "yv" in this: c&&a.set(b,encodeURIComponent(yv(

@@ -10,8 +10,8 @@ namespace ExampleApplication
 	{
 		static void Main(string[] args)
 		{
-            Search();
-            //Download();
+            //Search();
+            Download();
             Console.ReadLine();
         }
 
@@ -52,7 +52,7 @@ namespace ExampleApplication
             Log.setMode(false);
 
             // YouTube url
-            string link = "https://www.youtube.com/watch?v=daKz_b7LrsE";
+            string link = "https://www.youtube.com/watch?v=lWA2pjMjpBs";
 
             IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link, false);
 
