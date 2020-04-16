@@ -105,7 +105,8 @@ namespace YouTubeSearch
                         if (duration != "" && duration != " ")
                         {
                             // Add item to list
-                            items.Add(new VideoSearchComponents(title, author, description, duration, url, thumbnail, viewcount));
+                            items.Add(new VideoSearchComponents(Utilities.HtmlDecode(title), 
+                                Utilities.HtmlDecode(author), Utilities.HtmlDecode(description), duration, url, thumbnail, viewcount));
                         }
                     }
                 }
