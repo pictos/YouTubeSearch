@@ -99,6 +99,9 @@ namespace YouTubeSearch
                         }
                     }
 
+                    if (Log.getMode())
+                        Log.println(Helper.Folder, "Viewcount: " + viewcount);
+
                     // Remove playlists
                     if (title != "__title__" && title != " ")
                     {
