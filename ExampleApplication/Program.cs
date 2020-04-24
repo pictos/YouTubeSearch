@@ -52,7 +52,7 @@ namespace ExampleApplication
             Log.setMode(false);
 
             // YouTube url
-            string link = "https://www.youtube.com/watch?v=lWA2pjMjpBs";
+            string link = "https://www.youtube.com/watch?v=LN--3zgY5oM";
 
             IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link, false);
 

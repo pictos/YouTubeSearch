@@ -251,7 +251,7 @@ namespace YouTubeSearch
 
         private static string GetHtml5PlayerVersion(JObject json)
         {
-            var regex = new Regex(@"/(.+?).js");
+            var regex = new Regex(@"player(.+?).js");
 
             string js = json["assets"]["js"].ToString();
 
