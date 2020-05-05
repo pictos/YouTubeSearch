@@ -5,7 +5,7 @@ YouTubeSearch is a library for .NET, written in C#, to search and extract the do
 
 | Target | Branch | Version | Download link |
 | ------ | ------ | ------ | ------ |
-| Nuget | master | v2.0.5 | [![NuGet](https://img.shields.io/badge/nuget-v2.0.5-blue)](https://www.nuget.org/packages/YouTubeSearch/) |
+| Nuget | master | v2.0.6 | [![NuGet](https://img.shields.io/badge/nuget-v2.0.6-blue)](https://www.nuget.org/packages/YouTubeSearch/) |
 
 # Target platforms
 
