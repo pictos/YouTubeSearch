@@ -14,7 +14,7 @@ namespace YouTubeSearch
             try
             {
                 webclient = new WebClient();
-                webclient.Encoding = Encoding.UTF8;
+                webclient.Encoding = Encoding.Default;
 
                 Task<string> downloadStringTask = webclient.DownloadStringTaskAsync(new Uri(Url));
                 var content = await downloadStringTask;
