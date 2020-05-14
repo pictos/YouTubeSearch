@@ -55,7 +55,10 @@ namespace YouTubeSearch
             new VideoInfo (140, VideoType.Mp4, 0, false, AudioType.Aac, 128, AdaptiveType.Audio),
             new VideoInfo (141, VideoType.Mp4, 0, false, AudioType.Aac, 256, AdaptiveType.Audio),
             new VideoInfo (171, VideoType.WebM, 0, false, AudioType.Vorbis, 128, AdaptiveType.Audio),
-            new VideoInfo (172, VideoType.WebM, 0, false, AudioType.Vorbis, 192, AdaptiveType.Audio)
+            new VideoInfo (172, VideoType.WebM, 0, false, AudioType.Vorbis, 192, AdaptiveType.Audio),
+            new VideoInfo (249, VideoType.WebM, 0, false, AudioType.Opus, 58, AdaptiveType.Audio),
+            new VideoInfo (250, VideoType.WebM, 0, false, AudioType.Opus, 75, AdaptiveType.Audio),
+            new VideoInfo (251, VideoType.WebM, 0, false, AudioType.Opus, 146, AdaptiveType.Audio)
         };
 
         internal VideoInfo(int formatCode)
