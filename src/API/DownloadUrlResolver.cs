@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -186,7 +187,6 @@ namespace YouTubeSearch
                 string url;
 
                 bool requiresDecryption = false;
-
                 if (queries.ContainsKey("s") || queries.ContainsKey("sig"))
                 {
                     requiresDecryption = queries.ContainsKey("s");
@@ -206,7 +206,6 @@ namespace YouTubeSearch
                         url = NormalizeUrl(s);
                     }
                 }
-
                 else
                 {
                     url = queries["url"];
@@ -215,11 +214,47 @@ namespace YouTubeSearch
                 url = HttpHelper.UrlDecode(url);
                 url = HttpHelper.UrlDecode(url);
 
+                string pattern = "itag=(?<ITAG>.*?)&";
+                MatchCollection result = Regex.Matches(url, pattern, RegexOptions.Singleline);
+
+                var itag = result[0].Groups[1].Value;
+
+                string contentLength = "";
+
+                JToken sFormats = json["streamingData"]["formats"];
+
+                foreach (JObject obj in sFormats)
+                {
+                    if (obj.ContainsKey("itag"))
+                    {
+                        if (obj["itag"].ToString().Contains(itag))
+                            if (obj.ContainsKey("contentLength"))
+                                contentLength = obj["contentLength"].ToString();
+                    }
+                }
+
+                JToken aFormats = json["streamingData"]["adaptiveFormats"];
+
+                foreach (JObject obj in aFormats)
+                {
+                    if (obj.ContainsKey("itag"))
+                    {
+                        if (obj["itag"].ToString().Contains(itag))
+                            if (obj.ContainsKey("contentLength"))
+                                contentLength = obj["contentLength"].ToString();
+                    }
+                }
+
                 IDictionary<string, string> parameters = HttpHelper.ParseQueryString(url);
                 if (!parameters.ContainsKey(RateBypassFlag))
                     url += string.Format("&{0}={1}", RateBypassFlag, "yes");
 
-                yield return new ExtractionInfo { RequiresDecryption = requiresDecryption, Uri = new Uri(url) };
+                yield return new ExtractionInfo
+                {
+                    RequiresDecryption = requiresDecryption,
+                    Uri = new Uri(url),
+                    ContentLength = ContentLengthtoHumanReadable(contentLength)
+                };
             }
         }
 
@@ -297,7 +332,8 @@ namespace YouTubeSearch
                     {
                         DownloadUrl = extractionInfo.Uri.ToString(),
                         Title = videoTitle,
-                        RequiresDecryption = extractionInfo.RequiresDecryption
+                        RequiresDecryption = extractionInfo.RequiresDecryption,
+                        ContentLength = extractionInfo.ContentLength
                     };
                 }
 
@@ -357,11 +393,51 @@ namespace YouTubeSearch
             public bool RequiresDecryption { get; set; }
 
             public Uri Uri { get; set; }
+
+            public string ContentLength { get; set; }
         }
 
         private static string NormalizeUrl(string url)
         {
             return url.Replace("\"", "").Replace("url=", "");
+        }
+
+        private static string ContentLengthtoHumanReadable(string contentLength)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(contentLength))
+                    return "Unknown";
+
+                long ContentLength = 0;
+                long result;
+                var cLength = long.TryParse(contentLength, out ContentLength);
+
+                string File_Size;
+                string ext;
+
+                if (ContentLength >= 1073741824)
+                {
+                    result = ContentLength / 1073741824;
+                    ext = "GB";
+                }
+                else if (ContentLength >= 1048576)
+                {
+                    result = ContentLength / 1048576;
+                    ext = "MB";
+                }
+                else
+                {
+                    result = ContentLength / 1024;
+                    ext = "KB";
+                }
+                File_Size = result.ToString("0.00", CultureInfo.GetCultureInfo("en-US").NumberFormat);
+                return File_Size + " " + ext;
+            }
+            catch
+            {
+                return "Unknown";
+            }
         }
     }
 }

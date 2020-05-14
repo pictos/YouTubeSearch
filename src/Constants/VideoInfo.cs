@@ -203,6 +203,11 @@ namespace YouTubeSearch
         /// <returns></returns>
         internal string HtmlPlayerVersion { get; set; }
 
+        /// <summary>
+        /// File size
+        /// </summary>
+        public string ContentLength { get; set; }
+
         public override string ToString()
         {
             return string.Format("Full Title: {0}, Type: {1}, Resolution: {2}p", this.Title + this.VideoExtension, this.VideoType, this.Resolution);
