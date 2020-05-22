@@ -60,7 +60,7 @@ namespace YouTubeSearch
                     // Description
                     description = Helper.ExtractValue(result[ctr].Value, "dir=\"ltr\" class=\"yt-uix-redirect-link\">", "</div>");
 
-                    if (string.IsNullOrEmpty(description))
+                    if (string.IsNullOrEmpty(description.Trim()))
                         description = Helper.ExtractValue(result[ctr].Value, "<div class=\"yt-lockup-description yt-ui-ellipsis yt-ui-ellipsis-2\" dir=\"ltr\">", "</div>");
 
                     if (Log.getMode())
