@@ -11,7 +11,9 @@ namespace ExampleApplication
 		static void Main(string[] args)
 		{
             //Search();
-            Download();
+            //Download();
+            //Search_Playlist();
+            Search_PlaylistItems();
             Console.ReadLine();
         }
 
@@ -21,7 +23,7 @@ namespace ExampleApplication
             Log.setMode(false);
 
             // Keyword
-            string querystring = "Usher";
+            string querystring = "Kurdo";
 
             // Number of result pages
             int querypages = 1;
@@ -42,6 +44,62 @@ namespace ExampleApplication
                 Console.WriteLine("Url: " + item.getUrl());
                 Console.WriteLine("Thumbnail: " + item.getThumbnail());
                 Console.WriteLine("ViewCount: " + item.getViewCount());
+                Console.WriteLine("");
+            }
+        }
+
+        static async void Search_PlaylistItems()
+        {
+            // Disable logging
+            Log.setMode(false);
+
+            // Url
+            string playlisturl = "https://www.youtube.com/watch?v=Rystlv4HZK8&list=PLPSTbkP9ifeD_rXGRlBDckONsGW2Gmvxx";
+
+            ////////////////////////////////
+            // Start searching
+            ////////////////////////////////
+
+            PlaylistItemsSearch playlistItems = new PlaylistItemsSearch();
+            var items = await playlistItems.GetPlaylistItems(playlisturl);
+
+            foreach (var item in items)
+            {
+                Console.WriteLine("Title: " + item.getTitle());
+                Console.WriteLine("Author: " + item.getAuthor());
+                Console.WriteLine("Duration: " + item.getDuration());
+                Console.WriteLine("Thumbnail: " + item.getThumbnail());
+                Console.WriteLine("Url: " + item.getUrl());
+                Console.WriteLine("");
+            }
+        }
+
+        static async void Search_Playlist()
+        {
+            // Disable logging
+            Log.setMode(false);
+
+            // Keyword
+            string querystring = "Bushido";
+
+            // Number of result pages
+            int querypages = 1;
+
+            ////////////////////////////////
+            // Start searching
+            ////////////////////////////////
+
+            PlaylistSearch playlist = new PlaylistSearch();
+            var items = await playlist.GetPlaylists(querystring, querypages);
+
+            foreach (var item in items)
+            {
+                Console.WriteLine("Id: " + item.getId());
+                Console.WriteLine("Title: " + item.getTitle());
+                Console.WriteLine("Author: " + item.getAuthor());
+                Console.WriteLine("VideoCount: " + item.getVideoCount());
+                Console.WriteLine("Thumbnail: " + item.getThumbnail());
+                Console.WriteLine("Url: " + item.getUrl());
                 Console.WriteLine("");
             }
         }
