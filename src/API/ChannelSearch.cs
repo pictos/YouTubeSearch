@@ -90,7 +90,7 @@ namespace YouTubeSearch
             return items;
         }
 
-        public async Task<List<ChannelSearchComponents>> GetPlaylistsPaged(string querystring, int querypagenum)
+        public async Task<List<ChannelSearchComponents>> GetChannelsPaged(string querystring, int querypagenum)
         {
             items = new List<ChannelSearchComponents>();
 
