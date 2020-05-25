@@ -13,7 +13,9 @@ namespace ExampleApplication
             //Search();
             //Download();
             //Search_Playlist();
-            Search_PlaylistItems();
+            //Search_PlaylistItems();
+            //Search_Channel();
+            Search_ChannelItems();
             Console.ReadLine();
         }
 
@@ -54,7 +56,7 @@ namespace ExampleApplication
             Log.setMode(false);
 
             // Url
-            string playlisturl = "https://www.youtube.com/watch?v=Rystlv4HZK8&list=PLPSTbkP9ifeD_rXGRlBDckONsGW2Gmvxx";
+            string playlisturl = "https://www.youtube.com/channel/UCU8Xw_KewvcC3LV3Qv--JZg";
 
             ////////////////////////////////
             // Start searching
@@ -62,6 +64,32 @@ namespace ExampleApplication
 
             PlaylistItemsSearch playlistItems = new PlaylistItemsSearch();
             var items = await playlistItems.GetPlaylistItems(playlisturl);
+
+            foreach (var item in items)
+            {
+                Console.WriteLine("Title: " + item.getTitle());
+                Console.WriteLine("Author: " + item.getAuthor());
+                Console.WriteLine("Duration: " + item.getDuration());
+                Console.WriteLine("Thumbnail: " + item.getThumbnail());
+                Console.WriteLine("Url: " + item.getUrl());
+                Console.WriteLine("");
+            }
+        }
+
+        static async void Search_ChannelItems()
+        {
+            // Disable logging
+            Log.setMode(false);
+
+            // Url
+            string channelurl = "https://www.youtube.com/channel/UCU8Xw_KewvcC3LV3Qv--JZg";
+
+            ////////////////////////////////
+            // Start searching
+            ////////////////////////////////
+
+            ChannelItemsSearch channelItems = new ChannelItemsSearch();
+            var items = await channelItems.GetChannelItems(channelurl);
 
             foreach (var item in items)
             {
@@ -98,6 +126,37 @@ namespace ExampleApplication
                 Console.WriteLine("Title: " + item.getTitle());
                 Console.WriteLine("Author: " + item.getAuthor());
                 Console.WriteLine("VideoCount: " + item.getVideoCount());
+                Console.WriteLine("Thumbnail: " + item.getThumbnail());
+                Console.WriteLine("Url: " + item.getUrl());
+                Console.WriteLine("");
+            }
+        }
+
+        static async void Search_Channel()
+        {
+            // Disable logging
+            Log.setMode(false);
+
+            // Keyword
+            string querystring = "Bushido";
+
+            // Number of result pages
+            int querypages = 1;
+
+            ////////////////////////////////
+            // Start searching
+            ////////////////////////////////
+
+            ChannelSearch channel = new ChannelSearch();
+            var items = await channel.GetChannels(querystring, querypages);
+
+            foreach (var item in items)
+            {
+                Console.WriteLine("Id: " + item.getId());
+                Console.WriteLine("Title: " + item.getTitle());
+                Console.WriteLine("Description: " + item.getDescription());
+                Console.WriteLine("VideoCount: " + item.getVideoCount());
+                Console.WriteLine("SubscriberCount: " + item.getSubscriberCount());
                 Console.WriteLine("Thumbnail: " + item.getThumbnail());
                 Console.WriteLine("Url: " + item.getUrl());
                 Console.WriteLine("");
