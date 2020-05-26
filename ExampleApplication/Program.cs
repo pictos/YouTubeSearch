@@ -12,10 +12,10 @@ namespace ExampleApplication
 		{
             //Search();
             //Download();
-            //Search_Playlist();
+            Search_Playlist();
             //Search_PlaylistItems();
             //Search_Channel();
-            Search_ChannelItems();
+            //Search_ChannelItems();
             Console.ReadLine();
         }
 

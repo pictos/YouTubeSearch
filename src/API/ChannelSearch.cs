@@ -25,10 +25,12 @@ namespace YouTubeSearch
             for (int i = 1; i <= querypages; i++)
             {
                 // Search address
-                string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring + "&sp=EgIQAg%253D%253D&page=" + i);
+                string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring.Replace(" ", "+") + "&sp=EgIQAg%253D%253D&page=" + i);
+
+                content = Helper.ExtractValue(content, "window[\"ytInitialData\"]", "window[\"ytInitialPlayerResponse\"]");
 
                 // Search string
-                string pattern = "channelRenderer\":\\{\"channelId\":\"(?<ID>.*?)\".*?\",\"title\":\\{\"simpleText\":\"(?<TITLE>.*?)\".*?\\{\"webCommandMetadata\":\\{\"url\":\"(?<URL>.*?)\".*?\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?descriptionSnippet\":\\{\"runs\":\\[\\{\"text\":\"(?<DESCRIPTION>.*?)\".*?videoCountText\":\\{\"runs\":\\[\\{\"text\":\"(?<VIDEOCOUNT>.*?)\".*?subscriberCountText\":\\{\"simpleText\":\"(?<SUBSCRIBERCOUNT>.*?) .*?\"";
+                string pattern = "channelRenderer\":\\{\"channelId\":\"(?<ID>.*?)\",\"title\":{\"simpleText\":\"(?<TITLE>.*?)\".*?\"canonicalBaseUrl\":\"(?<URL>.*?)\"}}.*?\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?videoCountText\":\\{\"runs\":\\[\\{\"text\":\"(?<VIDEOCOUNT>.*?)\".*?clickTrackingParams";
                 MatchCollection result = Regex.Matches(content, pattern, RegexOptions.Singleline);
 
                 for (int ctr = 0; ctr <= result.Count - 1; ctr++)
@@ -49,13 +51,13 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder, "Title: " + Title);
 
                     // Description
-                    Description = result[ctr].Groups[5].Value;
+                    Description = Helper.ExtractValue(result[ctr].Value, "\"descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Description: " + Description);
 
                     // VideoCount
-                    VideoCount = result[ctr].Groups[6].Value;
+                    VideoCount = result[ctr].Groups[5].Value;
 
                     if (VideoCount.Contains(" ")) // -> 1 Video
                         VideoCount = VideoCount.Replace(" Video", "");
@@ -64,7 +66,7 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder, "VideoCount: " + VideoCount);
 
                     // SubscriberCount
-                    SubscriberCount = result[ctr].Groups[7].Value;
+                    SubscriberCount = Helper.ExtractValue(result[ctr].Value, "\"subscriberCountText\":{\"simpleText\":\"", " ");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "SubscriberCount: " + SubscriberCount);
@@ -96,10 +98,12 @@ namespace YouTubeSearch
 
             // Do search
             // Search address
-            string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring + "&sp=EgIQAg%253D%253D&page=" + querypagenum);
+            string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring.Replace(" ", "+") + "&sp=EgIQAg%253D%253D&page=" + querypagenum);
+
+            content = Helper.ExtractValue(content, "window[\"ytInitialData\"]", "window[\"ytInitialPlayerResponse\"]");
 
             // Search string
-            string pattern = "channelRenderer\":\\{\"channelId\":\"(?<ID>.*?)\".*?\",\"title\":\\{\"simpleText\":\"(?<TITLE>.*?)\".*?\\{\"webCommandMetadata\":\\{\"url\":\"(?<URL>.*?)\".*?\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?descriptionSnippet\":\\{\"runs\":\\[\\{\"text\":\"(?<DESCRIPTION>.*?)\".*?videoCountText\":\\{\"runs\":\\[\\{\"text\":\"(?<VIDEOCOUNT>.*?)\".*?subscriberCountText\":\\{\"simpleText\":\"(?<SUBSCRIBERCOUNT>.*?).*?\"";
+            string pattern = "channelRenderer\":\\{\"channelId\":\"(?<ID>.*?)\",\"title\":{\"simpleText\":\"(?<TITLE>.*?)\".*?\"canonicalBaseUrl\":\"(?<URL>.*?)\"}}.*?\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?videoCountText\":\\{\"runs\":\\[\\{\"text\":\"(?<VIDEOCOUNT>.*?)\".*?clickTrackingParams";
             MatchCollection result = Regex.Matches(content, pattern, RegexOptions.Singleline);
 
             for (int ctr = 0; ctr <= result.Count - 1; ctr++)
@@ -120,19 +124,22 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Title: " + Title);
 
                 // Description
-                Description = result[ctr].Groups[5].Value;
+                Description = Helper.ExtractValue(result[ctr].Value, "\"descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Description: " + Description);
 
                 // VideoCount
-                VideoCount = result[ctr].Groups[6].Value;
+                VideoCount = result[ctr].Groups[5].Value;
+
+                if (VideoCount.Contains(" ")) // -> 1 Video
+                    VideoCount = VideoCount.Replace(" Video", "");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "VideoCount: " + VideoCount);
 
                 // SubscriberCount
-                SubscriberCount = result[ctr].Groups[7].Value;
+                SubscriberCount = Helper.ExtractValue(result[ctr].Value, "\"subscriberCountText\":{\"simpleText\":\"", " ");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "SubscriberCount: " + SubscriberCount);

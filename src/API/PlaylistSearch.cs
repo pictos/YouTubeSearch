@@ -24,7 +24,7 @@ namespace YouTubeSearch
             for (int i = 1; i <= querypages; i++)
             {
                 // Search address
-                string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring + "&sp=EgIQAw%253D%253D&page=" + i);
+                string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring.Replace(" ", "+") + "&sp=EgIQAw%253D%253D&page=" + i);
 
                 // Search string
                 string pattern = "playlistRenderer\":\\{\"playlistId\":\"(?<ID>.*?)\",\"title\":\\{\"simpleText\":\"(?<TITLE>.*?)\"},\"thumbnails\":\\[\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?videoCount\":\"(?<VIDEOCOUNT>.*?)\".*?\\{\"webCommandMetadata\":\\{\"url\":\"(?<URL>.*?)\".*?\"shortBylineText\":\\{\"runs\":\\[\\{\"text\":\"(?<AUTHOR>.*?)\"";
@@ -86,7 +86,7 @@ namespace YouTubeSearch
 
             // Do search
             // Search address
-            string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring + "&sp=EgIQAw%253D%253D&page=" + querypagenum);
+            string content = await Web.getContentFromUrlWithProperty("https://www.youtube.com/results?search_query=" + querystring.Replace(" ", "+") + "&sp=EgIQAw%253D%253D&page=" + querypagenum);
 
             // Search string
             string pattern = "playlistRenderer\":\\{\"playlistId\":\"(?<ID>.*?)\",\"title\":\\{\"simpleText\":\"(?<TITLE>.*?)\"},\"thumbnails\":\\[\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?videoCount\":\"(?<VIDEOCOUNT>.*?)\".*?\\{\"webCommandMetadata\":\\{\"url\":\"(?<URL>.*?)\".*?\"shortBylineText\":\\{\"runs\":\\[\\{\"text\":\"(?<AUTHOR>.*?)\"";
