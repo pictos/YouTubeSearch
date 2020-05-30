@@ -87,13 +87,13 @@ namespace YouTubeSearch
         /// <c>AdaptiveType.Audio</c> or <c>AdaptiveType.Video</c> if the format is adaptive;
         /// otherwise, <c>AdaptiveType.None</c>.
         /// </value>
-        public AdaptiveType AdaptiveType { get; private set; }
+        public AdaptiveType AdaptiveType { get; set; }
 
         /// <summary>
         /// The approximate audio bitrate in kbit/s.
         /// </summary>
         /// <value>The approximate audio bitrate in kbit/s, or 0 if the bitrate is unknown.</value>
-        public int AudioBitrate { get; private set; }
+        public int AudioBitrate { get; set; }
 
         /// <summary>
         /// Gets the audio extension.
@@ -207,9 +207,22 @@ namespace YouTubeSearch
         internal string HtmlPlayerVersion { get; set; }
 
         /// <summary>
-        /// File size
+        /// FizeSize
         /// </summary>
-        public string ContentLength { get; set; }
+        public int FileSize { get; set; }
+
+        /// <summary>
+        /// Quality Label
+        /// </summary>
+        public string FormatNote { get; set; }
+
+        public int FPS { get; set; }
+
+        public int Height { get; set; }
+
+        public int Width { get; set; }
+
+        public float AverageBitrate { get; set; }
 
         public override string ToString()
         {

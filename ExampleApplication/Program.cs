@@ -11,8 +11,8 @@ namespace ExampleApplication
 		static void Main(string[] args)
 		{
             //Search();
-            //Download();
-            Search_Playlist();
+            Download();
+            //Search_Playlist();
             //Search_PlaylistItems();
             //Search_Channel();
             //Search_ChannelItems();
@@ -169,7 +169,7 @@ namespace ExampleApplication
             Log.setMode(false);
 
             // YouTube url
-            string link = "https://www.youtube.com/watch?v=LN--3zgY5oM";
+            string link = "https://www.youtube.com/watch?v=J10ffsLmo7w";
 
             IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link, false);
 
