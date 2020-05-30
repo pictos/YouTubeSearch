@@ -211,6 +211,8 @@ namespace YouTubeSearch
         /// </summary>
         public int FileSize { get; set; }
 
+        public string FileSizeHumanReadable { get; set; }
+
         /// <summary>
         /// Quality Label
         /// </summary>

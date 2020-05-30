@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -236,7 +237,11 @@ namespace YouTubeSearch
                     videoInfo.AudioBitrate = (int)fmt.AudioSampleRate.Value;
 
                 if (fmt.ContentLength.HasValue)
+                {
                     videoInfo.FileSize = (int)fmt.ContentLength.Value;
+                    videoInfo.FileSizeHumanReadable = ContentLengthtoHumanReadable(Convert.ToString(fmt.ContentLength.Value));
+                }
+                    
 
                 if (!string.IsNullOrEmpty(fmt.QualityLabel))
                     videoInfo.FormatNote = fmt.QualityLabel;
@@ -289,6 +294,44 @@ namespace YouTubeSearch
             throw new ParseException("Could not parse the Youtube page for URL " + videoUrl + "\n" +
                                             "This may be due to a change of the Youtube page structure.\n" +
                                             "Please report this bug at www.github.com/flagbug/YoutubeExtractor/issues", innerException);
+        }
+
+        private static string ContentLengthtoHumanReadable(string contentLength)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(contentLength))
+                    return "Unknown";
+
+                long ContentLength = 0;
+                long result;
+                var cLength = long.TryParse(contentLength, out ContentLength);
+
+                string File_Size;
+                string ext;
+
+                if (ContentLength >= 1073741824)
+                {
+                    result = ContentLength / 1073741824;
+                    ext = "GB";
+                }
+                else if (ContentLength >= 1048576)
+                {
+                    result = ContentLength / 1048576;
+                    ext = "MB";
+                }
+                else
+                {
+                    result = ContentLength / 1024;
+                    ext = "KB";
+                }
+                File_Size = result.ToString("0.00", CultureInfo.GetCultureInfo("en-US").NumberFormat);
+                return File_Size + " " + ext;
+            }
+            catch
+            {
+                return "Unknown";
+            }
         }
     }
 }
