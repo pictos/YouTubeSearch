@@ -33,13 +33,13 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Match: " + result[ctr].Value);
 
                 // Title
-                Title = result[ctr].Groups[1].Value;
+                Title = result[ctr].Groups[1].Value.Replace(@"\u0026", "&");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Title: " + Title);
 
                 // Author
-                Author = result[ctr].Groups[2].Value;
+                Author = result[ctr].Groups[2].Value.Replace(@"\u0026", "&");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Author: " + Author);

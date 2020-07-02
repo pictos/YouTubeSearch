@@ -10,8 +10,8 @@ namespace ExampleApplication
 	{
 		static void Main(string[] args)
 		{
-            //Search();
-            Download();
+            Search();
+            //Download();
             //Search_Playlist();
             //Search_PlaylistItems();
             //Search_Channel();
@@ -25,7 +25,7 @@ namespace ExampleApplication
             Log.setMode(false);
 
             // Keyword
-            string querystring = "Kurdo";
+            string querystring = "Test";
 
             // Number of result pages
             int querypages = 1;

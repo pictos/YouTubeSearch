@@ -34,6 +34,7 @@ namespace YouTubeSearch
                 MatchCollection result = Regex.Matches(content, pattern, RegexOptions.Singleline);
 
                 for (int ctr = 0; ctr <= result.Count - 1; ctr++)
+
                 {
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Match: " + result[ctr].Value);
@@ -45,13 +46,13 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder, "Id: " + Id);
 
                     // Title
-                    Title = result[ctr].Groups[2].Value;
+                    Title = result[ctr].Groups[2].Value.Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Title: " + Title);
 
                     // Description
-                    Description = Helper.ExtractValue(result[ctr].Value, "\"descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},");
+                    Description = Helper.ExtractValue(result[ctr].Value, "\"descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},").Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Description: " + Description);
@@ -118,13 +119,13 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Id: " + Id);
 
                 // Title
-                Title = result[ctr].Groups[2].Value;
+                Title = result[ctr].Groups[2].Value.Replace(@"\u0026", "&"); ;
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Title: " + Title);
 
                 // Description
-                Description = Helper.ExtractValue(result[ctr].Value, "\"descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},");
+                Description = Helper.ExtractValue(result[ctr].Value, "\"descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},").Replace(@"\u0026", "&"); ;
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Description: " + Description);

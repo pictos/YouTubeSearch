@@ -33,8 +33,10 @@ namespace YouTubeSearch
                 // Search address
                 string content = await Web.getContentFromUrl("https://www.youtube.com/results?search_query=" + querystring + "&page=" + i);
 
+                content = Helper.ExtractValue(content, "window[\"ytInitialData\"]", "window[\"ytInitialPlayerResponse\"]");
+
                 // Search string
-                string pattern = "<div class=\"yt-lockup-content\">.*?title=\"(?<NAME>.*?)\".*?</div></div></div></li>";
+                string pattern = "videoRenderer.*?serviceEndpoint";
                 MatchCollection result = Regex.Matches(content, pattern, RegexOptions.Singleline);
 
                 for (int ctr = 0; ctr <= result.Count - 1; ctr++)
@@ -43,50 +45,45 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder,"Match: " + result[ctr].Value);
 
                     // Title
-                    title = result[ctr].Groups[1].Value;
+                    title = Helper.ExtractValue(result[ctr].Value, "\"title\":{\"runs\":[{\"text\":\"", "\"}]").Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Title: " + title);
 
                     // Author
-                    author = Helper.ExtractValue(result[ctr].Value, "/user/", "class").Replace('"', ' ').TrimStart().TrimEnd();
-
-                    if (string.IsNullOrEmpty(author))
-                        author = Helper.ExtractValue(result[ctr].Value, " >", "</a>");
+                    author = Helper.ExtractValue(result[ctr].Value, "\"ownerText\":{\"runs\":[{\"text\":\"", "\",\"").Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Author: " + author);
 
                     // Description
-                    description = Helper.ExtractValue(result[ctr].Value, "dir=\"ltr\" class=\"yt-uix-redirect-link\">", "</div>");
-
-                    if (string.IsNullOrEmpty(description.Trim()))
-                        description = Helper.ExtractValue(result[ctr].Value, "<div class=\"yt-lockup-description yt-ui-ellipsis yt-ui-ellipsis-2\" dir=\"ltr\">", "</div>");
+                    description = Helper.ExtractValue(result[ctr].Value, "descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},").Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Description: " + description);
 
                     // Duration
-                    duration = Helper.ExtractValue(Helper.ExtractValue(result[ctr].Value, "id=\"description-id-", "span"), ": ", "<").Replace(".", "");
+                    duration = Helper.ExtractValue(result[ctr].Value, "lengthText\"", "viewCountText");
+                    duration = Helper.ExtractValue(duration, "simpleText\":\"", "\"");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Duration: " + duration);
 
                     // Url
-                    url = string.Concat("http://www.youtube.com/watch?v=", Helper.ExtractValue(result[ctr].Value, "watch?v=", "\""));
+                    url = string.Concat("http://www.youtube.com/watch?v=", Helper.ExtractValue(result[ctr].Value, "videoId\":\"", "\""));
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Url: " + url);
 
                     // Thumbnail
-                    thumbnail = "https://i.ytimg.com/vi/" + Helper.ExtractValue(result[ctr].Value, "watch?v=", "\"") + "/mqdefault.jpg";
+                    thumbnail = Helper.ExtractValue(result[ctr].Value, "\"thumbnail\":{\"thumbnails\":[{\"url\":\"", "\"").Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Thumbnail: " + thumbnail);
 
                     // View count
                     {
-                        string strView = Helper.ExtractValue(result[ctr].Value, "</li><li>", "</li></ul></div>");
+                        string strView = Helper.ExtractValue(result[ctr].Value, "\"viewCountText\":{\"simpleText\":\"", "\"},\"");
                         if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
                         {
                             string[] strParsedArr =
@@ -132,8 +129,10 @@ namespace YouTubeSearch
             // Search address
             string content = await Web.getContentFromUrl("https://www.youtube.com/results?search_query=" + querystring + "&page=" + querypagenum);
 
+            content = Helper.ExtractValue(content, "window[\"ytInitialData\"]", "window[\"ytInitialPlayerResponse\"]");
+
             // Search string
-            string pattern = "<div class=\"yt-lockup-content\">.*?title=\"(?<NAME>.*?)\".*?</div></div></div></li>";
+            string pattern = "videoRenderer.*?serviceEndpoint";
             MatchCollection result = Regex.Matches(content, pattern, RegexOptions.Singleline);
 
             for (int ctr = 0; ctr <= result.Count - 1; ctr++)
@@ -142,50 +141,45 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Match: " + result[ctr].Value);
 
                 // Title
-                title = result[ctr].Groups[1].Value;
+                title = Helper.ExtractValue(result[ctr].Value, "\"title\":{\"runs\":[{\"text\":\"", "\"}]").Replace(@"\u0026", "&");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Title: " + title);
 
                 // Author
-                author = Helper.ExtractValue(result[ctr].Value, "/user/", "class").Replace('"', ' ').TrimStart().TrimEnd();
-
-                if (string.IsNullOrEmpty(author))
-                    author = Helper.ExtractValue(result[ctr].Value, " >", "</a>");
+                author = Helper.ExtractValue(result[ctr].Value, "\"ownerText\":{\"runs\":[{\"text\":\"", "\",\"").Replace(@"\u0026", "&");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Author: " + author);
 
                 // Description
-                description = Helper.ExtractValue(result[ctr].Value, "dir=\"ltr\" class=\"yt-uix-redirect-link\">", "</div>");
-
-                if (string.IsNullOrEmpty(description.Trim()))
-                    description = Helper.ExtractValue(result[ctr].Value, "<div class=\"yt-lockup-description yt-ui-ellipsis yt-ui-ellipsis-2\" dir=\"ltr\">", "</div>");
+                description = Helper.ExtractValue(result[ctr].Value, "descriptionSnippet\":{\"runs\":[{\"text\":\"", "\"}]},").Replace(@"\u0026", "&");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Description: " + description);
 
                 // Duration
-                duration = Helper.ExtractValue(Helper.ExtractValue(result[ctr].Value, "id=\"description-id-", "span"), ": ", "<").Replace(".", "");
+                duration = Helper.ExtractValue(result[ctr].Value, "lengthText\"", "viewCountText");
+                duration = Helper.ExtractValue(duration, "simpleText\":\"", "\"");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Duration: " + duration);
 
                 // Url
-                url = string.Concat("http://www.youtube.com/watch?v=", Helper.ExtractValue(result[ctr].Value, "watch?v=", "\""));
+                url = string.Concat("http://www.youtube.com/watch?v=", Helper.ExtractValue(result[ctr].Value, "videoId\":\"", "\""));
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Url: " + url);
 
                 // Thumbnail
-                thumbnail = "https://i.ytimg.com/vi/" + Helper.ExtractValue(result[ctr].Value, "watch?v=", "\"") + "/mqdefault.jpg";
+                thumbnail = Helper.ExtractValue(result[ctr].Value, "\"thumbnail\":{\"thumbnails\":[{\"url\":\"", "\"").Replace(@"\u0026", "&");
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Thumbnail: " + thumbnail);
 
                 // View count
                 {
-                    string strView = Helper.ExtractValue(result[ctr].Value, "</li><li>", "</li></ul></div>");
+                    string strView = Helper.ExtractValue(result[ctr].Value, "\"viewCountText\":{\"simpleText\":\"", "\"},\"");
                     if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
                     {
                         string[] strParsedArr =

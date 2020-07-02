@@ -42,13 +42,13 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder, "Id: " + Id);
 
                     // Title
-                    Title = result[ctr].Groups[2].Value;
+                    Title = result[ctr].Groups[2].Value.Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Title: " + Title);
 
                     // Author
-                    Author = result[ctr].Groups[6].Value;
+                    Author = result[ctr].Groups[6].Value.Replace(@"\u0026", "&");
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Author: " + Author);
@@ -66,7 +66,7 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder, "Thumbnail: " + Thumbnail);
 
                     // Url
-                    Url = "http://youtube.com" + result[ctr].Groups[5].Value.Replace(@"\u0026", "&");
+                    Url = "http://youtube.com" + result[ctr].Groups[5].Value;
 
                     if (Log.getMode())
                         Log.println(Helper.Folder, "Url: " + Url);
@@ -104,13 +104,13 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Id: " + Id);
 
                 // Title
-                Title = result[ctr].Groups[2].Value;
+                Title = result[ctr].Groups[2].Value.Replace(@"\u0026", "&"); ;
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Title: " + Title);
 
                 // Author
-                Author = result[ctr].Groups[6].Value;
+                Author = result[ctr].Groups[6].Value.Replace(@"\u0026", "&"); ;
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Author: " + Author);
@@ -128,7 +128,7 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Thumbnail: " + Thumbnail);
 
                 // Url
-                Url = "http://youtube.com" + result[ctr].Groups[5].Value.Replace(@"\u0026", "&");
+                Url = "http://youtube.com" + result[ctr].Groups[5].Value;
 
                 if (Log.getMode())
                     Log.println(Helper.Folder, "Url: " + Url);
