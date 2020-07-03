@@ -2,7 +2,7 @@
 
 namespace YouTubeSearch
 {
-	class Utilities
+	static class Utilities
 	{
         public static string HtmlDecode(string value)
         {
