@@ -12,5 +12,10 @@ namespace YouTubeSearch
             }
             catch { return value; }
         }
+		
+	public static bool IsValid(this string val)
+	{
+		return !string.IsNullOrEmpty(val) && !string.IsNullOrWhiteSpace(val);
+	}
     }
 }
