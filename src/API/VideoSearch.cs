@@ -84,7 +84,7 @@ namespace YouTubeSearch
                     // View count
                     {
                         string strView = Helper.ExtractValue(result[ctr].Value, "\"viewCountText\":{\"simpleText\":\"", "\"},\"");
-                        if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
+                        if (strView.IsValid())//if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
                         {
                             string[] strParsedArr =
                                 strView.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -100,9 +100,9 @@ namespace YouTubeSearch
                         Log.println(Helper.Folder, "Viewcount: " + viewcount);
 
                     // Remove playlists
-                    if (title != "__title__" && title != " ")
+                    if (title != "__title__" && title.IsValid()/*title != " "*/)
                     {
-                        if (duration != "" && duration != " ")
+                        if (duration.IsValid())//if (duration != "" && duration != " ")
                         {
                             // Add item to list
                             items.Add(new VideoSearchComponents(Utilities.HtmlDecode(title), 
@@ -180,7 +180,7 @@ namespace YouTubeSearch
                 // View count
                 {
                     string strView = Helper.ExtractValue(result[ctr].Value, "\"viewCountText\":{\"simpleText\":\"", "\"},\"");
-                    if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
+                    if(strView.IsValid())//if (!string.IsNullOrEmpty(strView) && !string.IsNullOrWhiteSpace(strView))
                     {
                         string[] strParsedArr =
                             strView.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -196,9 +196,9 @@ namespace YouTubeSearch
                     Log.println(Helper.Folder, "Viewcount: " + viewcount);
 
                 // Remove playlists
-                if (title != "__title__" && title != " ")
+                if (title != "__title__" && title.IsValid() /*!= " "*/)
                 {
-                    if  (!string.IsNullOrEmpty(duration) && duration != " ") // The second condition can be !string.IsNullOrWhiteSpace(duration).
+                    if  (duration.IsValid())//(!string.IsNullOrEmpty(duration) && duration != " ") // The second condition can be !string.IsNullOrWhiteSpace(duration).
                     {
                         // Add item to list
                         items.Add(new VideoSearchComponents(Utilities.HtmlDecode(title),
