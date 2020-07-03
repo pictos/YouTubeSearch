@@ -198,7 +198,7 @@ namespace YouTubeSearch
                 // Remove playlists
                 if (title != "__title__" && title != " ")
                 {
-                    if (duration != "" && duration != " ")
+                    if  (!string.IsNullOrEmpty(duration) && duration != " ") // The second condition can be !string.IsNullOrWhiteSpace(duration).
                     {
                         // Add item to list
                         items.Add(new VideoSearchComponents(Utilities.HtmlDecode(title),
