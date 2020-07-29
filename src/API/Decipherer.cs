@@ -15,16 +15,16 @@ namespace YouTubeSearch
             //Find "yv" in this: c&&a.set(b,encodeURIComponent(yv(
             string functNamePattern = @"(\w+)=function\(\w+\){(\w+)=\2\.split\(\x22{2}\);.*?return\s+\2\.join\(\x22{2}\)}"; //Regex Formed To Find Word or DollarSign
 
-            var funcName = Regex.Match(js, functNamePattern).Groups[1].Value;
+            var funcName = Regex.Match(js, functNamePattern).Groups[0].Value;
 
             if (funcName.Contains("$"))
             {
                 funcName = "\\" + funcName; //Due To Dollar Sign Introduction, Need To Escape
             }
 
-            string funcPattern = @"(?!h\.)" + @funcName + @"=function\(\w+\)\{(.*?)\}"; //Escape funcName string
-            var funcBody = Regex.Match(js, funcPattern, RegexOptions.Singleline).Value; //Entire sig function
-            var lines = funcBody.Split(';'); //Each line in sig function
+            //string funcPattern = @"(?!h\.)" + @funcName + @"=function\(\w+\)\{(.*?)\}"; //Escape funcName string
+            //var funcBody = Regex.Match(js, funcPattern, RegexOptions.Singleline).Value; //Entire sig function
+            var lines = funcName.Split(';'); //Each line in sig function
 
             string idReverse = "", idSlice = "", idCharSwap = ""; //Hold name for each cipher method
             string functionIdentifier = "";
