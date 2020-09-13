@@ -24,7 +24,7 @@ namespace YouTubeSearch
             string content = await Web.getContentFromUrlWithProperty(Playlisturl);
 
             // Search string
-            string pattern = "playlistPanelVideoRenderer\":\\{\"title\":\\{\"simpleText\":\"(?<TITLE>.*?)\".*?runs\":\\[\\{\"text\":\"(?<AUTHOR>.*?)\".*?\":\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?\"}},\"simpleText\":\"(?<DURATION>.*?)\".*?videoId\":\"(?<URL>.*?)\"";
+            string pattern = "playlistPanelVideoRenderer\":\\{\"title\":\\{\"accessibility\":\\{\"accessibilityData\":\\{\"label\":.*?\\,\"simpleText\":\"(?<TITLE>.*?)\".*?runs\":\\[\\{\"text\":\"(?<AUTHOR>.*?)\".*?\":\\{\"thumbnails\":\\[\\{\"url\":\"(?<THUMBNAIL>.*?)\".*?\"}},\"simpleText\":\"(?<DURATION>.*?)\".*?videoId\":\"(?<URL>.*?)\"";
             MatchCollection result = Regex.Matches(content, pattern, RegexOptions.Singleline);
 
             for (int ctr = 0; ctr <= result.Count - 1; ctr++)
